@@ -15,7 +15,7 @@ suite('Add Products page', function() {
     let nameFieldFound = body.includes('<input id="name" type="text" name="name"/>');
     assert.ok(nameFieldFound, "Field 'name' is missing");
 
-    let quantityFieldFound = body.includes('<input id="quantity" type="text" name="quantity"/>');
+    let quantityFieldFound = body.includes('<input id="price" type="text" name="quantity"/>');
     assert.ok(quantityFieldFound, "Field 'quantity' is missing");
 
     let buttonAddFound = body.includes('<button type="submit">Add</button>');
@@ -24,7 +24,7 @@ suite('Add Products page', function() {
 
   test('Add valid product', async function() {
     let res = await fetch(
-      "http://localhost:8888/Add-Product",
+      "http://localhost:8080/Add-Product",
       {
         method: 'POST',
         headers: {
@@ -35,7 +35,7 @@ suite('Add Products page', function() {
     );
     let body = await res.text();
     let productsReturned = body.includes(
-		"<ul><li>Flour (2 cups)</li><li>Salt (1 tea spoon)</li><li>Water (3 cups)</li><li>Salami (100 g)</li></ul>");
+		"<ul><li>Butter - 2 table spoons</li><li>Flour - 1 cup</li><li>Milk - 3 cups</li><li>Salami - 100 g</li></ul>");
     assert.ok(productsReturned, "Add product failed");
   });
 
