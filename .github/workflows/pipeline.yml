@@ -56,5 +56,21 @@ jobs:
       run: sleep 5
     - name: Run UI Tests
       run: npm run test:ui
+  
+  deploy:
+
+    needs: ui-tests
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repo 
+      uses: actions/checkout@v4
+    - name: Deploy to production
+      uses: JorgeLNJunior/render-deploy@v1.4.4
+      with:
+        service_id: ${{ secrets.SERVICE_ID }}
+        api_key: ${{ secrets.RENDER_TOKEN }}
+        wait_deploy: true
     
 
